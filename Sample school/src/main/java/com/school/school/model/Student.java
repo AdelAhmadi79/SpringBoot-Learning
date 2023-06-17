@@ -1,27 +1,24 @@
 package com.school.school.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Getter;
-import lombok.NonNull;
 import lombok.Setter;
 import lombok.ToString;
-import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import javax.validation.constraints.Email;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Getter
 @Setter
 @ToString
-@Entity(name = "tbl_student")
+@Entity
 
-//Needs to be completed
-//@Table(name = "tbl_student")
+@Table(name = "tbl_student")
 public class Student {
 
     @Id
@@ -29,12 +26,14 @@ public class Student {
     @Column(name = "id" )
     private long id;
 
-
     @Column(name = "name")
-    @NotNull
+// I prefer use all three annotations (@NotNull @NotEmpty @NotBlank) to make errors clearer
+    @NotNull @NotEmpty @NotBlank
     private String name;
 
     @Column(name = "location")
+// I prefer use all three annotations (@NotNull @NotEmpty @NotBlank) to make errors clearer
+    @NotNull @NotEmpty @NotBlank
     private String location;
 
     @Column(name = "JYear")
