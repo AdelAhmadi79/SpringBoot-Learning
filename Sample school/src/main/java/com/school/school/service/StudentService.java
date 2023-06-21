@@ -10,4 +10,10 @@ public interface StudentService {
     Student getSingleStudent(Long id);
     void deleteStudent(Long id);
     Student updateStudent(Student student);
+
+    //In Fact this method is kinda a filter by name
+    List<Student> getStudentsByName(String name);
+
+    List<Student> getStudentsByNameAndLocation(String name, String location);
+
 }

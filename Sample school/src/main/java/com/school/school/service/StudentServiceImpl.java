@@ -5,7 +5,6 @@ import com.school.school.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -44,6 +43,16 @@ public class StudentServiceImpl implements StudentService {
     public Student updateStudent(Student student) {
         return sRepository.save(student);
         //if student obj has id ==> update , if not ==> saveStudent
+    }
+
+    @Override
+    public List<Student> getStudentsByName(String name) {
+        return sRepository.findStudentsByName(name);
+    }
+
+    @Override
+    public List<Student> getStudentsByNameAndLocation(String name, String location) {
+        return sRepository.findStudentsByNameAndLocation(name,location);
     }
 
 

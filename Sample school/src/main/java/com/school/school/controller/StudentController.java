@@ -6,6 +6,8 @@ package com.school.school.controller;
 import com.school.school.service.StudentService;
 import com.school.school.model.Student;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,31 +20,40 @@ public class StudentController {
     private StudentService stService;
 
     @GetMapping("/students")
-    public List<Student> getStudents() {
-        return stService.getStudents();
+    public ResponseEntity<List<Student>> getStudents() {
+        return new ResponseEntity<List<Student>>(stService.getStudents(), HttpStatus.OK);
     }
 
     @GetMapping("/students/{id}")
-    public Student getStudent(@PathVariable Long id) {
-        return stService.getSingleStudent(id);
+    public ResponseEntity<Student> getStudent(@PathVariable Long id) {
+        return new ResponseEntity<Student>(stService.getSingleStudent(id), HttpStatus.OK);
     }
 
     @PostMapping("students")
-    public Student saveStudent(@Valid @RequestBody Student student) {
-        return stService.saveStudent(student);
+    public ResponseEntity<Student> saveStudent(@Valid @RequestBody Student student) {
+        return new ResponseEntity<>(stService.saveStudent(student), HttpStatus.CREATED);
     }
 
     @PutMapping("students/{id}")
-    public Student updateStudent(@PathVariable Long id, @RequestBody Student student) {
+    public ResponseEntity<Student> updateStudent(@PathVariable Long id, @RequestBody Student student) {
         student.setId(id);
-        return stService.updateStudent(student);
+        return new ResponseEntity<Student>(stService.updateStudent(student), HttpStatus.OK);
     }
 
     @DeleteMapping("/students")
-    public String deleteStudent(@RequestParam Long id) {
+    public ResponseEntity<HttpStatus> deleteStudent(@RequestParam Long id) {
         stService.deleteStudent(id);
-        return "student " + id + " details DELETED";
+        System.out.println("student " + id + " details DELETED");
+        return new ResponseEntity<HttpStatus>(HttpStatus.NO_CONTENT);
     }
 
+    @GetMapping("/students/filterByName")
+    public ResponseEntity<List<Student>> getStudentsByName(@RequestParam String name) {
+        return new ResponseEntity<List<Student>>(stService.getStudentsByName(name), HttpStatus.OK);
+    }
 
+    @GetMapping("/students/filterByNameAndLocation")
+    public ResponseEntity<List<Student>> getStudnetsByNameAndLocation(@RequestParam String name, @RequestParam String location){
+        return new ResponseEntity<List<Student>>(stService.getStudentsByNameAndLocation(name,location),HttpStatus.OK);
+    }
 }
