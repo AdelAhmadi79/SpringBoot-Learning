@@ -10,4 +10,5 @@ import java.util.List;
 public interface StudentRepository extends JpaRepository<Student,Long> {
     List<Student> findStudentsByName(String name);
     List<Student> findStudentsByNameAndLocation(String name,String location);
+    List<Student> findByNameContaining(String keyword);
 }

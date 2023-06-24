@@ -3,6 +3,8 @@ package com.school.school.service;
 import com.school.school.model.Student;
 import com.school.school.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +18,9 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository sRepository;
 
     @Override
-    public List<Student> getStudents() {
-        return sRepository.findAll();
+    public List<Student> getStudents(int pageNumber, int pageSize) {
+        Pageable pages = PageRequest.of(pageNumber,pageSize);
+        return sRepository.findAll(pages).getContent();
     }
 
     @Override
@@ -53,6 +56,11 @@ public class StudentServiceImpl implements StudentService {
     @Override
     public List<Student> getStudentsByNameAndLocation(String name, String location) {
         return sRepository.findStudentsByNameAndLocation(name,location);
+    }
+
+    @Override
+    public List<Student> getStudentsByNameKeyword(String keyword) {
+        return sRepository.findByNameContaining(keyword);
     }
 
 

@@ -20,8 +20,8 @@ public class StudentController {
     private StudentService stService;
 
     @GetMapping("/students")
-    public ResponseEntity<List<Student>> getStudents() {
-        return new ResponseEntity<List<Student>>(stService.getStudents(), HttpStatus.OK);
+    public ResponseEntity<List<Student>> getStudents(@RequestParam Integer pageNumber, Integer pageSize) {
+        return new ResponseEntity<List<Student>>(stService.getStudents(pageNumber,pageSize), HttpStatus.OK);
     }
 
     @GetMapping("/students/{id}")
@@ -55,5 +55,10 @@ public class StudentController {
     @GetMapping("/students/filterByNameAndLocation")
     public ResponseEntity<List<Student>> getStudnetsByNameAndLocation(@RequestParam String name, @RequestParam String location){
         return new ResponseEntity<List<Student>>(stService.getStudentsByNameAndLocation(name,location),HttpStatus.OK);
+    }
+
+    @GetMapping("students/filterByNameKeyword")
+    public ResponseEntity<List<Student>> getStudentsByNameKeyword(@RequestParam String keyword){
+        return new ResponseEntity<List<Student>>(stService.getStudentsByNameKeyword(keyword),HttpStatus.OK);
     }
 }

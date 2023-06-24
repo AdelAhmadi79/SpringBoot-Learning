@@ -5,7 +5,7 @@ import com.school.school.model.Student;
 import java.util.List;
 
 public interface StudentService {
-    List<Student> getStudents();
+    List<Student> getStudents(int pageNumber, int pageSize);
     Student saveStudent(Student student);
     Student getSingleStudent(Long id);
     void deleteStudent(Long id);
@@ -15,5 +15,7 @@ public interface StudentService {
     List<Student> getStudentsByName(String name);
 
     List<Student> getStudentsByNameAndLocation(String name, String location);
+
+    List<Student> getStudentsByNameKeyword(String keyword);
 
 }
