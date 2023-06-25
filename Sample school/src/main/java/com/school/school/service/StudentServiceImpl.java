@@ -5,6 +5,7 @@ import com.school.school.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,8 +19,9 @@ public class StudentServiceImpl implements StudentService {
     private StudentRepository sRepository;
 
     @Override
-    public List<Student> getStudents(int pageNumber, int pageSize) {
-        Pageable pages = PageRequest.of(pageNumber,pageSize);
+    public List<Student> getStudents(int pageNumber, int pageSize ) {
+        Sort sort = Sort.by(Sort.Direction.DESC , "id");
+        Pageable pages = PageRequest.of(pageNumber,pageSize , sort);
         return sRepository.findAll(pages).getContent();
     }
 

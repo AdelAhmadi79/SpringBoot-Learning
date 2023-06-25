@@ -3,8 +3,8 @@ package com.school.school.controller;
 //import com.example.student.entity.Student;
 //import com.example.student.service.StudentService;
 
-import com.school.school.service.StudentService;
 import com.school.school.model.Student;
+import com.school.school.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +21,7 @@ public class StudentController {
 
     @GetMapping("/students")
     public ResponseEntity<List<Student>> getStudents(@RequestParam Integer pageNumber, Integer pageSize) {
-        return new ResponseEntity<List<Student>>(stService.getStudents(pageNumber,pageSize), HttpStatus.OK);
+        return new ResponseEntity<List<Student>>(stService.getStudents(pageNumber, pageSize), HttpStatus.OK);
     }
 
     @GetMapping("/students/{id}")
@@ -53,12 +53,12 @@ public class StudentController {
     }
 
     @GetMapping("/students/filterByNameAndLocation")
-    public ResponseEntity<List<Student>> getStudnetsByNameAndLocation(@RequestParam String name, @RequestParam String location){
-        return new ResponseEntity<List<Student>>(stService.getStudentsByNameAndLocation(name,location),HttpStatus.OK);
+    public ResponseEntity<List<Student>> getStudnetsByNameAndLocation(@RequestParam String name, @RequestParam String location) {
+        return new ResponseEntity<List<Student>>(stService.getStudentsByNameAndLocation(name, location), HttpStatus.OK);
     }
 
     @GetMapping("students/filterByNameKeyword")
-    public ResponseEntity<List<Student>> getStudentsByNameKeyword(@RequestParam String keyword){
-        return new ResponseEntity<List<Student>>(stService.getStudentsByNameKeyword(keyword),HttpStatus.OK);
+    public ResponseEntity<List<Student>> getStudentsByNameKeyword(@RequestParam String keyword) {
+        return new ResponseEntity<List<Student>>(stService.getStudentsByNameKeyword(keyword), HttpStatus.OK);
     }
 }
