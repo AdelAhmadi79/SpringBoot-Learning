@@ -7,7 +7,6 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -19,33 +18,37 @@ import java.util.Set;
 @ToString
 @Entity
 
-@Table(name = "tbl_student")
-public class Student {
-
+@Table(name = "tbl_course")
+public class Course {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "student_id" )
+    @Column(name = "course_id")
     private long id;
 
-    @Column(name = "name")
+    @Column(name = "course_title")
 // I prefer use all three annotations (@NotNull @NotEmpty @NotBlank) to make errors clearer
     @NotNull @NotEmpty @NotBlank
-    private String name;
+    private String title;
 
-    @Column(name = "location")
-// I prefer use all three annotations (@NotNull @NotEmpty @NotBlank) to make errors clearer
-    @NotNull @NotEmpty @NotBlank
-    private String location;
+    @Column
+    private String department;
 
-    @Column(name = "JYear")
-    private int joinYear;
+    @Column
+    private int capacity;
 
-    @Column(name = "age")
-    private Long age=0L;
+    @Column
+    private int duration;
 
-    @Column(name = "email")
-    @Email(message = "Pls enter a valid email address")
-    private String email;
+    @Column
+    private String instructor;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "start_date")
+    private Date startDate;
+
+    @Temporal(TemporalType.DATE)
+    @Column(name = "end_date")
+    private Date endDate;
 
     @CreationTimestamp
     @Column(name = "created_at" , nullable = false , updatable = false)
@@ -54,12 +57,8 @@ public class Student {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private Date updatedAt;
-    //ToDo:edit this and see why it has error
-    @ManyToMany
-    @JoinTable(
-            name = "student_course",
-            joinColumns = @JoinColumn(name = "student_id"),
-            inverseJoinColumns = @JoinColumn(name = "course_id")
-    )
-    private Set<Course> likedCourses;
+//Todo: check again
+    @ManyToMany(mappedBy = "likedCourses")
+    private Set<Student> likes;
+
 }

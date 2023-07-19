@@ -18,7 +18,7 @@ public class SwaggerConfig {
     public Docket api() {
         return new Docket(DocumentationType.SWAGGER_2)
 
-                .host("localhost:3030")
+                .host("localhost:8080")
                 .groupName("public")
                 .select()
                 .apis(RequestHandlerSelectors.basePackage("com.school.school"))

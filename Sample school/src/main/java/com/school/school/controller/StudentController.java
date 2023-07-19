@@ -53,7 +53,7 @@ public class StudentController {
     }
 
     @GetMapping("/students/filterByNameAndLocation")
-    public ResponseEntity<List<Student>> getStudnetsByNameAndLocation(@RequestParam String name, @RequestParam String location) {
+    public ResponseEntity<List<Student>> getStudentsByNameAndLocation(@RequestParam String name, @RequestParam String location) {
         return new ResponseEntity<List<Student>>(stService.getStudentsByNameAndLocation(name, location), HttpStatus.OK);
     }
 
